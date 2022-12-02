@@ -20,9 +20,9 @@ ascii_logo = [
 ]
 
 main_menu = [
-    "1. Text To Speech",
-    "2. Auto Clicker",
-    "3. Credits"
+    "Text To Speech",
+    "Auto Clicker",
+    "Credits",
 ]
 
 def display_logo():
@@ -41,25 +41,15 @@ def display_logo():
         elif i == 5:
             console.print(line, style="green")
 
-def create_menu(number_of_columns, menu):
-    for i in range(number_of_columns):
-        table.add_column("                           ", justify="left", style="cyan", no_wrap=True)
-
-    multiple = len(menu) / number_of_columns
-    multiple = int(multiple)
-
+def create_menu(menu):
     counter = 1
 
-    for i in range(number_of_columns):
-
-        # print(counter, counter + number_of_columns, (counter + number_of_columns)+number_of_columns)
-        table.add_row(menu[counter - 1], menu[counter + number_of_columns - 1], menu[(counter + number_of_columns)+number_of_columns - 1])
+    for i in menu:
+        print(f"{counter}. {i}")
 
         counter += 1
     
-    console.print(table)
-
-    return int(input("Choose an option: ")) - 1
+    return (int(input("Choose an item : ")))
 
 def tts():
     text = input("Enter text: ")
@@ -88,15 +78,17 @@ def start():
     while True:
         display_logo()
 
-        option_index = create_menu(1, main_menu)
-        option_index = int(option_index)
+        print("")
+
+        option_index = create_menu(main_menu)
+        option_index = int(option_index) - 1
 
         if option_index == 0:
             tts()
 
         elif option_index == 1:
             autoclicker()
-        
+
         elif option_index == 2:
             credits()
 
